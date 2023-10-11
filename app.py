@@ -6,6 +6,7 @@ from flask import Flask, render_template, request, jsonify
 import requests
 from pymongo import MongoClient
 from bs4 import BeautifulSoup
+import certifi
 
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
@@ -13,8 +14,8 @@ load_dotenv(dotenv_path)
 MONGODB_URI="mongodb+srv://azharyazied2:14juni2002@cluster0.4uh4rdq.mongodb.net/?retryWrites=true&w=majority"
 DB_NAME="dbyzd"
 
-
-client = MongoClient(MONGODB_URI)
+cert = certifi.where()
+client = MongoClient(MONGODB_URI, tlsCAFile=cert)
 db = client[DB_NAME]
 
 app = Flask(__name__)
